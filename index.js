@@ -1,3 +1,8 @@
+let firstNumber = null;
+let operator = null;
+let secondNumber = null;
+let displayValue = "";
+
 function add(a, b) {
   return a + b;
 }
@@ -32,6 +37,18 @@ function operate(operator, a, b) {
   }
 }
 
-let firstNumber = null;
-let operator = null;
-let secondNumber = null;
+function updateDisplay(value) {
+  displayValue += value;
+  document.querySelector("#display").textContent = displayValue;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      if (!isNaN(button.textContent) || button.textContent === ".") {
+        updateDisplay(button.textContent);
+      }
+    });
+  });
+});
