@@ -59,16 +59,23 @@ function clearDisplay() {
 }
 
 function handleOperator(op) {
-  firstNumber = displayValue;
-  operator = op;
-  updateDisplay(operator);
+  if (operator && displayValue.split(operator)[1]) {
+    handleEquals();
+    operator = op;
+    updateDisplay(operator);
+  } else {
+    firstNumber = displayValue;
+    operator = op;
+    updateDisplay(operator);
+  }    
 }
 
 function handleEquals() {
-  if (operator && firstNumber !== "" && displayValue !== "") {
+  if (operator && firstNumber) {
     secondNumber = displayValue.split(operator)[1];
     displayValue = String(operate(operator, firstNumber, secondNumber));
     document.querySelector("#display").textContent = displayValue;
+    firstNumber = displayValue;
     operator = null;
   }
 }
