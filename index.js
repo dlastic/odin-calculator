@@ -78,8 +78,8 @@ function handleOperator(op) {
 }
 
 function handleEquals() {
-  if (operator && firstNumber) {
-    secondNumber = displayValue.split(operator)[1];
+  secondNumber = displayValue.split(operator)[1];
+  if (operator && firstNumber && secondNumber) {
     displayValue = roundResult(operate(operator, firstNumber, secondNumber));
     document.querySelector("#display").textContent = displayValue;
     firstNumber = displayValue;
