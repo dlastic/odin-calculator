@@ -1,5 +1,5 @@
 let firstNumber = "";
-let operator = null;
+let operator = "";
 let secondNumber = "";
 let displayValue = "0";
 
@@ -59,7 +59,7 @@ function updateDisplay(value) {
 function clearDisplay() {
   firstNumber = "";
   secondNumber = "";
-  operator = null;
+  operator = "";
   displayValue = "0";
   document.querySelector("#display").textContent = displayValue;
 }
@@ -83,7 +83,7 @@ function handleEquals() {
     displayValue = roundResult(operate(operator, firstNumber, secondNumber));
     document.querySelector("#display").textContent = displayValue;
     firstNumber = displayValue;
-    operator = null;
+    operator = "";
   }
 }
 
