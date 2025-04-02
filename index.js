@@ -65,8 +65,9 @@ function clearDisplay() {
 }
 
 function handleOperator(op) {
+  secondNumber = displayValue.split(operator)[1];
   // If operator and secondNumber exists
-  if (operator && displayValue.split(operator)[1]) {
+  if (operator && secondNumber) {
     handleEquals();
     operator = op;
     updateDisplay(operator);
@@ -74,11 +75,19 @@ function handleOperator(op) {
     firstNumber = displayValue;
     operator = op;
     updateDisplay(operator);
-  }    
+  }
 }
 
 function handleEquals() {
   secondNumber = displayValue.split(operator)[1];
+
+  // Handle dividing by zero
+  if (operator === "/" && secondNumber == 0) {
+    alert("Error: Dividing by 0");
+    clearDisplay();
+    return;
+  }
+
   if (operator && firstNumber && secondNumber) {
     displayValue = roundResult(operate(operator, firstNumber, secondNumber));
     document.querySelector("#display").textContent = displayValue;
