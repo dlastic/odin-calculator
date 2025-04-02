@@ -39,7 +39,13 @@ function operate(op, a, b) {
   }
 }
 
+function roundResult(value) {
+  const rounded = Number(value.toPrecision(8));
+  return rounded.toString().length > 10 ? rounded.toExponential(4) : String(rounded);
+}
+
 function updateDisplay(value) {
+  // Different behaviour depending on the current display text
   if (!isNaN(value)) {
     displayValue === "0" ? displayValue = value : displayValue += value;
   } else if (isNaN(displayValue.at(-1))) {
@@ -59,6 +65,7 @@ function clearDisplay() {
 }
 
 function handleOperator(op) {
+  // If operator and secondNumber exists
   if (operator && displayValue.split(operator)[1]) {
     handleEquals();
     operator = op;
@@ -73,7 +80,7 @@ function handleOperator(op) {
 function handleEquals() {
   if (operator && firstNumber) {
     secondNumber = displayValue.split(operator)[1];
-    displayValue = String(operate(operator, firstNumber, secondNumber));
+    displayValue = roundResult(operate(operator, firstNumber, secondNumber));
     document.querySelector("#display").textContent = displayValue;
     firstNumber = displayValue;
     operator = null;
