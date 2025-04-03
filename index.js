@@ -2,6 +2,7 @@ let firstNumber = "";
 let operator = "";
 let secondNumber = "";
 let displayValue = "0";
+let shouldResetDisplay = false;
 
 function add(a, b) {
   return a + b;
@@ -45,6 +46,11 @@ function roundResult(value) {
 }
 
 function updateDisplay(value) {
+  if (shouldResetDisplay && !isNaN(value)) {
+    displayValue = "";
+    shouldResetDisplay = false;
+  }
+
   // Different behaviour depending on the current display text
   if (!isNaN(value)) {
     displayValue === "0" ? displayValue = value : displayValue += value;
@@ -61,6 +67,7 @@ function clearDisplay() {
   secondNumber = "";
   operator = "";
   displayValue = "0";
+  shouldResetDisplay = false;
   document.querySelector("#display").textContent = displayValue;
 }
 
@@ -76,6 +83,7 @@ function handleOperator(op) {
     operator = op;
     updateDisplay(operator);
   }
+  shouldResetDisplay = false;
 }
 
 function handleEquals() {
@@ -93,6 +101,7 @@ function handleEquals() {
     document.querySelector("#display").textContent = displayValue;
     firstNumber = displayValue;
     operator = "";
+    shouldResetDisplay = true;
   }
 }
 
