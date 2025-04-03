@@ -51,6 +51,11 @@ function updateDisplay(value) {
     shouldResetDisplay = false;
   }
 
+  if (value === ".") {
+    const parts = operator ? displayValue.split(operator) : [displayValue];
+    if (parts[parts.length - 1].includes(".")) return;
+  }
+
   // Different behaviour depending on the current display text
   if (!isNaN(value)) {
     displayValue === "0" ? displayValue = value : displayValue += value;
